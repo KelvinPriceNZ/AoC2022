@@ -2,7 +2,7 @@
 
 file=list()
 
-with open("./input", "r") as f:
+with open("./input.txt", "r") as f:
 	file=f.read().splitlines()
 
 elves=list()
