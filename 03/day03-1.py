@@ -28,7 +28,7 @@ for line in [x.strip() for x in file]:
       if b.get(i,0) == 1:
          b[i]=2
 
-   for c, _ in {k: v for k, v in b.items() if v == 2}.items():
+   for c in [k for k, v in b.items() if v == 2]:
       sum += priority(c)
 
 print(sum)

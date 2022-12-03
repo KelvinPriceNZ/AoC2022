@@ -26,7 +26,7 @@ for g in range(0,len(file),3):
       if b.get(c, 0) == 2:
          b[c] = 3
       
-   for c, _ in {k: v for k, v in b.items() if v == 3}.items():
+   for c in [k for k, v in b.items() if v == 3]:
       sum += priority(c)
 
 print(sum)
