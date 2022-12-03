@@ -5,7 +5,7 @@
 One folder per day/problem  01-25
 
 each folder has 2 Python scripts, 1 for each part of that day's question and the input.txt downloaded from AoC
-scripts are named day${day}-$part}.py
+scripts are named day${day}-${part}.py
 
 the base folder has a script "results.bash", run it from the base folder to see accumulated results
 
