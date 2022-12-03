@@ -10,3 +10,4 @@ scripts are named `day${day}-${part}.py`
 the base folder has a script `results.bash`, run it from the base folder to see accumulated results
 
 for each day, cd to that day's folder and run the Python script(s) to get the answer for that day and problem part
+in a day's folder, run `../fetch-input` to retrieve that day's input file to `./input.txt`, to do so, you will need to store your AoC session cookie in `~/.aoc.session`
