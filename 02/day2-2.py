@@ -55,7 +55,6 @@ for line in file:
 	if me == "L": me = Loses(elf)
 	score = Result(elf, me) + SCORE[me]
 	total_score += score
-	print(f"elf {elf} me {me} score: {score}")
 
 
 print(total_score)
