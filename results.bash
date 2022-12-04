@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for day in [012][0-9]
+for day in {01..25}
 do
    cd $day
 
