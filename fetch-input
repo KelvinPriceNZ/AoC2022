@@ -1,6 +1,11 @@
 day=$(basename $(pwd) | sed -e 's/^0//')
 
-if [ ! -s ./input.txt ]
+FILE=input.txt
+
+if [ ! -s ./${FILE} ]
 then
-   wget --no-cookies --header "Cookie: session=$(<~/.aoc.session)" https://adventofcode.com/2022/day/$day/input -O input.txt
+   wget --no-cookies --header "Cookie: session=$(<~/.aoc.session)" https://adventofcode.com/2022/day/$day/input -O ${FILE}
 fi
+
+head ${FILE}
+tail ${FILE}
