@@ -33,6 +33,6 @@ for line in lines:
       stacks[s_to] += t
 
 for s in range(len(stacks)):
-   print(stacks[s].pop(), end='')
+   print(stacks[s][-1], end='')
 
 print()
