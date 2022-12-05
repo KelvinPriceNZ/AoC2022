@@ -6,7 +6,6 @@ do
 
    echo -n "Day $(basename $day)"
 
-   solved=0
    for part in 1 2
    do
       soln="./day${day}-${part}.py"
@@ -16,8 +15,7 @@ do
          echo -en "\t\t"
          $soln
       else
-         echo -en "\t\t*Unsolved*"
-         echo ""
+         echo -e "\t\t*Unsolved*"
       fi
    done
    cd ~-
