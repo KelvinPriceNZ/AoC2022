@@ -25,7 +25,7 @@ def tick():
    if abs(X - pos) < 2:
       print("█", end="")
    else:
-      print(" ", end="")
+      print(" ", end="")
 
    if pos == 39 : print()
 
