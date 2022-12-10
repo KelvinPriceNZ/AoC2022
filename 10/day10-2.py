@@ -7,39 +7,37 @@ with open("./input.txt", "r") as f:
    lines=f.read().splitlines()
 
 X = 1
-history = list()
-history.append(X)
+history = [ X ]
 
 cycle = 0
-print("#", end="")
+print("█", end="")
+
+def tick():
+   global X
+   global cycle
+   global history
+
+   cycle += 1
+   history.append(X)
+
+   pos = cycle % 40
+
+   if abs(X - pos) < 2:
+      print("█", end="")
+   else:
+      print(" ", end="")
+
+   if pos == 39 : print()
 
 for line in lines:
-   if line[0:4] == "noop":
-      cycle += 1
-      pos = cycle % 40
-      if pos == 0 : print()
-      history.append(X)
-      if abs(X - pos) < 2:
-         print("#", end="")
-      else:
-         print(".", end="")
+   tick()
 
-   if line[0:4] == "addx":
-      _, amount = line.split()
-      history.append(X)
-      cycle += 1
-      pos = cycle % 40
-      if pos == 0 : print()
-      if abs(X - pos) < 2:
-         print("#", end="")
-      else:
-         print(".", end="")
-      history.append(X)
-      X += int(amount)
-      cycle += 1
-      pos = cycle % 40
-      if pos == 0 : print()
-      if abs(X - pos) < 2:
-         print("#", end="")
-      else:
-         print(".", end="")
+   instr = line[0:4]
+
+   if instr == "noop":
+      pass
+   elif instr == "addx":
+      amount = int(line[5:])
+      X += amount
+
+      tick()
