@@ -1,83 +1,82 @@
 #!/usr/bin/env python3
 import math
 
+s = (0,0)
+rope = list()
+rope_length = 10
+for i in range(rope_length):
+   rope.append(s)
+
+tail_history = { rope[-1] : 1 }
+
+""" Possible delta positions from current position
+[ (-2,-2), (-2,-1), (-2, 0), (-2, 1), (-2, 2) ],
+[ (-1,-2), (-1,-1), (-1, 0), (-1, 1), (-1, 2) ],
+[ ( 0,-2), ( 0,-1), ( 0, 0), ( 0, 1), ( 0, 2) ],
+[ ( 1,-2), ( 1,-1), ( 1, 0), ( 1, 1), ( 1, 2) ],
+[ ( 2,-2), ( 2,-1), ( 2, 0), ( 2, 1), ( 2, 2) ]
+"""
+
+# Lookup table for move delta
+move_table = [
+   [ (-1,-1), (-1,-1), (-1, 0), (-1, 1), (-1, 1) ],
+   [ (-1,-1), ( 0, 0), ( 0, 0), ( 0, 0), (-1, 1) ],
+   [ ( 0,-1), ( 0, 0), ( 0, 0), ( 0, 0), ( 0, 1) ],
+   [ ( 1,-1), ( 0, 0), ( 0, 0), ( 0, 0), ( 1, 1) ],
+   [ ( 1,-1), ( 1,-1), ( 1, 0), ( 1, 1), ( 1, 1) ]
+]
+
+def calc_delta(prev, curr):
+   px, py = prev
+   cx, cy = curr
+
+   dx = px - cx
+   dy = py - cy
+
+   return ( dx, dy )
+
+def calc_move(m):
+   mx, my = m
+
+   mx += 2
+   my += 2
+
+   return move_table[mx][my]
+
+def make_move(current, delta):
+   fx, fy = current
+   dx, dy = delta
+   fx += dx
+   fy += dy
+   return (fx, fy)
+
+cmd_delta = {
+   "U": ( 0, 1),
+   "D": ( 0,-1),
+   "L": (-1, 0),
+   "R": ( 1, 0)
+}
+
 lines = list()
 
 with open("./input.txt", "r") as f:
    lines=f.read().splitlines()
 
-s = (10,10)
-rope = [ s, s, s, s, s, s, s, s, s, s ]
-t_hist = { rope[-1] : 1 }
-
-o = {
-   "U": 1,
-   "D": -1,
-   "L": -1,
-   "R": 1
-}
-
 for line in lines:
    cmd, n = line.split()
    n = int(n)
 
-   h = rope[0]
-   hx, hy = h
-
+   # Move head one step at a time
    for m in range(1,n+1):
-      if cmd == "R": hx += 1
-      if cmd == "L": hx -= 1
-      if cmd == "U": hy += 1
-      if cmd == "D": hy -= 1
-         
-      h = ( hx, hy )
-      rope[0] = h
+      rope[0] = make_move(rope[0], cmd_delta[cmd])
 
+      # Make rest of rope adjust accordingly for each head move
       for knot in range(1, len(rope)):
          p = rope[knot - 1]
          c = rope[knot]
 
-         px, py = p
-         cx, cy = c
+         rope[knot] = make_move(c, calc_move(calc_delta(p,c)))
 
-         dx = px - cx
-         dy = py - cy
-         d = ( dx, dy )
+      tail_history[rope[-1]] = 1
 
-         if d == (-2, -2): cx -= 1; cy -= 1
-         if d == (-2, -1): cx -= 1; cy -= 1
-         if d == (-2,  0): cx -= 1;
-         if d == (-2,  1): cx -= 1; cy += 1
-         if d == (-2,  2): cx -= 1; cy += 1
-
-         if d == (-1, -2): cx -= 1; cy -= 1
-         if d == (-1, -1): pass
-         if d == (-1,  0): pass
-         if d == (-1,  1): pass
-         if d == (-1,  2): cx -= 1; cy += 1
-
-         if d == ( 0, -2): cy -= 1
-         if d == ( 0, -1): pass
-         if d == ( 0,  0): pass
-         if d == ( 0,  1): pass
-         if d == ( 0,  2): cy += 1
-
-         if d == ( 1, -2): cx += 1; cy -= 1
-         if d == ( 1, -1): pass
-         if d == ( 1,  0): pass
-         if d == ( 1,  1): pass
-         if d == ( 1,  2): cx += 1; cy += 1
-
-         if d == ( 2, -2): cx += 1; cy -= 1
-         if d == ( 2, -1): cx += 1; cy -= 1
-         if d == ( 2,  0): cx += 1
-         if d == ( 2,  1): cx += 1; cy += 1
-         if d == ( 2,  2): cx += 1; cy += 1
-
-         c = (cx ,cy)
-         rope[knot] = c
-
-      t_hist[rope[-1]] = 1
-
-
-print(len(t_hist.keys()))
+print(len(tail_history.keys()))
