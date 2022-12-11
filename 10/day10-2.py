@@ -7,7 +7,6 @@ with open("./input.txt", "r") as f:
    lines=f.read().splitlines()
 
 X = 1
-history = [ X ]
 
 cycle = 0
 print("█", end="")
@@ -15,19 +14,16 @@ print("█", end="")
 def tick():
    global X
    global cycle
-   global history
 
    cycle += 1
-   history.append(X)
 
-   pos = cycle % 40
+   pixel = cycle % 40
 
-   if abs(X - pos) < 2:
-      print("█", end="")
-   else:
-      print(" ", end="")
+   pixel_on = abs(X - pixel) < 2 
 
-   if pos == 39 : print()
+   print("█" if pixel_on else " ", end="")
+
+   if pixel == 39 : print()
 
 for line in lines:
    tick()
