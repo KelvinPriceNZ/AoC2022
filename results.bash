@@ -8,7 +8,7 @@ do
    do
       soln="./day${day}-${part}.py"
       echo -e "Day $(basename $day) Part $part"
-      if [ -s ${soln} ]
+      if [ -s ${soln} -a -x $soln ]
       then
          $soln
       else
