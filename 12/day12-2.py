@@ -2,12 +2,12 @@
 import math
 import sys
 sys.setrecursionlimit(10_000)
-import curses
+#import curses
 from functools import cmp_to_key
 from Node import Node
 from collections import deque
 
-w = curses.initscr()
+#w = curses.initscr()
 
 lines = list()
 
@@ -102,15 +102,15 @@ def bfs(begin):
 
    open_queue.append(land_map[begin.x][begin.y])
 
-   draw()
+   #draw()
 
    counter = 0
 
    while len(open_queue) > 0:
       counter += 1
-      draw()
+      #draw()
       cell = open_queue.popleft()
-      w.addstr(52,0,str(cell))
+      #w.addstr(52,0,str(cell))
 
       if cell == finish:
          break
@@ -118,11 +118,11 @@ def bfs(begin):
       exits = neighbours(cell)
 
       for n in exits:
-         w.addstr(53,0,str(n))
+         #w.addstr(53,0,str(n))
          if land_map[n.x][n.y].visited:
             continue
 
-         w.addstr(54,0,f"C: {cell.height} N: {land_map[n.x][n.y].height}")
+         #w.addstr(54,0,f"C: {cell.height} N: {land_map[n.x][n.y].height}")
          if ord(land_map[n.x][n.y].height) - ord(cell.height) > 1:
             continue
 
@@ -130,7 +130,7 @@ def bfs(begin):
 
          land_map[n.x][n.y].visited = True
          land_map[n.x][n.y].set_counter(cell.counter + 1)
-         draw()
+         #draw()
 
    #w.getch()
 
@@ -148,8 +148,8 @@ for row in range(len(land_map)):
    steps = bfs(land_map[row][0])
    best_steps = min([best_steps, steps])
 
-   w.addstr(55,0,str(steps))
+   #w.addstr(55,0,str(steps))
 
-curses.endwin()
+#curses.endwin()
 
 print(best_steps)

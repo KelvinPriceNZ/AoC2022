@@ -2,12 +2,12 @@
 import math
 import sys
 sys.setrecursionlimit(10_000)
-import curses
+#import curses
 from functools import cmp_to_key
 from Node import Node
 from collections import deque
 
-w = curses.initscr()
+#w = curses.initscr()
 
 lines = list()
 
@@ -102,15 +102,15 @@ start.visited = True
 
 open_queue.append(land_map[start.x][start.y])
 
-draw()
+#draw()
 
 counter = 0
 
 while len(open_queue) > 0:
    counter += 1
-   draw()
+   #draw()
    cell = open_queue.popleft()
-   w.addstr(52,0,str(cell))
+   #w.addstr(52,0,str(cell))
 
    if cell == finish:
       break
@@ -118,11 +118,11 @@ while len(open_queue) > 0:
    exits = neighbours(cell)
 
    for n in exits:
-      w.addstr(53,0,str(n))
+      #w.addstr(53,0,str(n))
       if land_map[n.x][n.y].visited:
          continue
 
-      w.addstr(54,0,f"C: {cell.height} N: {land_map[n.x][n.y].height}")
+      #w.addstr(54,0,f"C: {cell.height} N: {land_map[n.x][n.y].height}")
       if ord(land_map[n.x][n.y].height) - ord(cell.height) > 1:
          continue
 
@@ -130,16 +130,9 @@ while len(open_queue) > 0:
 
       land_map[n.x][n.y].visited = True
       land_map[n.x][n.y].set_counter(cell.counter + 1)
-      draw()
+      #draw()
 
-w.getch()
-curses.endwin()
-print("OUT")
+#w.getch()
+#curses.endwin()
 
-print(f"count: {counter}")
-print(f"S: {start}")
-print(f"E: {land_map[finish.x][finish.y]}")
-
-print(solution)
-print(min_steps)
-print(finish)
+print(f"{land_map[finish.x][finish.y].counter}")
