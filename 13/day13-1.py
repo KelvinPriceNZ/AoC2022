@@ -18,8 +18,6 @@ right_list = [x for i, x in enumerate(pairs) if i % 2 == 1]
 def compare(l, r, depth = 0):
    in_order = True
 
-   print(f"{l} Vs {r} : {depth}")
-
    if type(l) != list: l = [ l ]
    if type(r) != list: r = [ r ]
 
@@ -53,10 +51,7 @@ for p in range(len(left_list)):
    right = right_list[p]
 
    if compare(left, right):
-      print(f"T {p+1}")
       index = p + 1
       sum += index
-   else:
-      print(f"F {p+1}")
 
-print(f"Sum: {sum}")
+print(f"{sum}")

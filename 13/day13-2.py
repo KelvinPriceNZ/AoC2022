@@ -56,8 +56,6 @@ for p in range(len(left_list)):
       index = p + 1
       sum += index
 
-print(f"Sum: {sum}")
-
 def sort_cmp(l,r):
    if compare(l,r): return -1
    if compare(r,l): return 1
@@ -65,5 +63,13 @@ def sort_cmp(l,r):
 
 decoded = sorted(pairs, key=cmp_to_key(sort_cmp))
 
+tags = list()
+
 for i, p in enumerate(decoded):
-   print(f"{i +1:5} {p}")
+   if p == [[2]]: tags.append(i)
+   if p == [[6]]: tags.append(i)
+
+total = 1
+for tag in tags:
+   total *= tag
+print(total)
