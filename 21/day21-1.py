@@ -27,6 +27,7 @@ def dfs(monkey):
       opa = dfs(monkeys[monkey]["opa"])
       monkeys[monkey]["opa"] = opa
       op = monkeys[monkey]["op"] 
+      if op == "/": op = "//"
       opb = dfs(monkeys[monkey]["opb"])
       monkeys[monkey]["opb"] = opb
       soln = eval(f"{opa} {op} {opb}")
