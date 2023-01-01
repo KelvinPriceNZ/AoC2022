@@ -26,7 +26,7 @@ def dfs(monkey):
    else:
       opa = dfs(monkeys[monkey]["opa"])
       monkeys[monkey]["opa"] = opa
-      op = monkeys[monkey]["op"] 
+      op = monkeys[monkey]["op"]
       if op == "/": op = "//"
       opb = dfs(monkeys[monkey]["opb"])
       monkeys[monkey]["opb"] = opb
