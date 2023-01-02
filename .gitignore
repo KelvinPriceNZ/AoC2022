@@ -1,5 +1,7 @@
 results.txt
+.idea/
 __pycache__
 input.txt
 input.orig
-inputs/*
+!inputs/
+inputs/**
